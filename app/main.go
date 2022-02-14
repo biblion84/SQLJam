@@ -12,6 +12,8 @@ import (
 var screenWidth = float32(1920)
 var screenHeight = float32(1080)
 
+const zoomLevel = 1.5
+
 const currentSQLWidth = 640
 
 const dividerThickness = 4
@@ -53,7 +55,7 @@ func LoadStyleMain() {
 	raygui.SetStyle(raygui.Default, raygui.BorderColorNormalProp, 0x3E3546FF)
 	raygui.SetStyle(raygui.Default, raygui.TextColorNormalProp, 0x625565FF)
 
-	raygui.SetStyle(raygui.Default, raygui.TextSizeProp, 28)
+	raygui.SetStyle(raygui.Default, raygui.TextSizeProp, 28*zoomLevel)
 
 	raygui.SetStyle(raygui.Default, raygui.BaseColorFocusedProp, 0x625565FF)
 	raygui.SetStyle(raygui.Default, raygui.BorderColorFocusedProp, 0x3E3546FF)
@@ -61,7 +63,7 @@ func LoadStyleMain() {
 
 	SetStyleColor(raygui.ScrollBarControl, raygui.BorderColorPressedProp, Tint(MainColor(), 0.3))
 	SetStyleColor(raygui.SliderControl, raygui.BaseColorNormalProp, Tint(MainColor(), 0.3))
-	raygui.SetStyle(raygui.ListViewControl, raygui.ScrollBarWidth, 20)
+	raygui.SetStyle(raygui.ListViewControl, raygui.ScrollBarWidth, 20*zoomLevel)
 }
 
 func MarkInspectorDirtyCurrent() {
@@ -96,7 +98,7 @@ func Main() {
 	// much fps or not you decide
 	rl.SetTargetFPS(int32(rl.GetMonitorRefreshRate(rl.GetCurrentMonitor())))
 
-	font = rl.LoadFont("JetBrainsMono-Regular.ttf")
+	font = rl.LoadFontEx("JetBrainsMono-Regular.ttf", 64, nil, 0)
 	//rl.GenTextureMipmaps(&font.Texture) // kinda muddy? need second opinion
 	rl.SetTextureFilter(font.Texture, rl.FilterBilinear) // FILTER_TRILINEAR requires generated mipmaps
 
@@ -302,11 +304,11 @@ func drawCurrentSQL() {
 		dividerThickness, rl.Black,
 	)
 	DoPane(rl.Rectangle{screenWidth - currentSQLWidth + dividerThickness, screenHeight - resultsCurrentHeight, currentSQLWidth - dividerThickness, resultsOpenHeight()}, func(p Pane) {
-		const headerHeight = 40
-		const bottomButtonHeights = 40
-		const padding = 6
-		const fontSize = 20
-		const lineHeight = 24
+		const headerHeight = 40 * zoomLevel
+		const bottomButtonHeights = 40 * zoomLevel
+		const padding = 6 * zoomLevel
+		const fontSize = 20 * zoomLevel
+		const lineHeight = 24 * zoomLevel
 
 		rl.DrawRectangleRec(p.Bounds, MainColor())
 

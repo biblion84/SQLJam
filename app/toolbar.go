@@ -7,7 +7,7 @@ import (
 
 func drawToolbar() {
 	toolbarWidth := int32(rl.GetScreenWidth())
-	toolbarHeight := int32(64)
+	toolbarHeight := int32(64 * zoomLevel)
 	rl.DrawRectangle(0, 0, toolbarWidth, toolbarHeight, rl.ColorAlpha(rl.Black, 0.5))
 	rl.DrawLineEx(
 		rl.Vector2{0, float32(toolbarHeight)},
@@ -16,8 +16,8 @@ func drawToolbar() {
 		rl.Black,
 	)
 
-	const buttHeight = 40  // thicc
-	const buttSpacing = 15 // extra thicc
+	const buttHeight = 40 * zoomLevel  // thicc
+	const buttSpacing = 15 * zoomLevel // extra thicc
 
 	initNewNode := func(n *Node, defaultSize rl.Vector2) {
 		n.Pos = rl.Vector2Subtract(cam.Target, rl.Vector2DivideV(defaultSize, rl.Vector2{2, 2}))
@@ -50,7 +50,7 @@ func drawToolbar() {
 
 	nextX = doToolbarButton(
 		"Table", "Get the contents of a database table.",
-		buttonRect(nextX, 100),
+		buttonRect(nextX, 100*zoomLevel),
 		TableColor,
 		func() *Node {
 			n := NewTable()
@@ -61,7 +61,7 @@ func drawToolbar() {
 
 	nextX = doToolbarButton(
 		"Filter", "Pick only the rows matching the condition.",
-		buttonRect(nextX, 120),
+		buttonRect(nextX, 120*zoomLevel),
 		FilterColor,
 		func() *Node {
 			n := NewFilter()
@@ -72,7 +72,7 @@ func drawToolbar() {
 
 	nextX = doToolbarButton(
 		"Pick Columns", "Pick only the specified columns. Can also rename columns.",
-		buttonRect(nextX, 200),
+		buttonRect(nextX, 200*zoomLevel),
 		PickColumnsColor,
 		func() *Node {
 			n := NewPickColumns()
@@ -83,7 +83,7 @@ func drawToolbar() {
 
 	nextX = doToolbarButton(
 		"Sort", "Sort the table by one or more columns.",
-		buttonRect(nextX, 100),
+		buttonRect(nextX, 100*zoomLevel),
 		SortColor,
 		func() *Node {
 			n := NewSort()
@@ -94,7 +94,7 @@ func drawToolbar() {
 
 	nextX = doToolbarButton(
 		"Aggregate", "Aggregate all the rows of the table into a single result, optionally grouping by one or more columns.",
-		buttonRect(nextX, 160),
+		buttonRect(nextX, 160*zoomLevel),
 		AggregateColor,
 		func() *Node {
 			n := NewAggregate()
@@ -105,7 +105,7 @@ func drawToolbar() {
 
 	nextX = doToolbarButton(
 		"Join", "Combine multiple tables into one by pairing up rows that match a certain condition.",
-		buttonRect(nextX, 120),
+		buttonRect(nextX, 120*zoomLevel),
 		JoinColor,
 		func() *Node {
 			n := NewJoin()
@@ -116,7 +116,7 @@ func drawToolbar() {
 
 	nextX = doToolbarButton(
 		"Combine Rows", "Take two tables with the same schema and combine their rows using set operations.",
-		buttonRect(nextX, 200),
+		buttonRect(nextX, 200*zoomLevel),
 		CombineRowsColor,
 		func() *Node {
 			n := NewCombineRows(Union)
@@ -127,7 +127,7 @@ func drawToolbar() {
 
 	doToolbarButton(
 		"Preview", "View the results of a query as you work.",
-		buttonRect(screenWidth-buttSpacing-160, 160),
+		buttonRect(screenWidth-buttSpacing-(160*zoomLevel), 160*zoomLevel),
 		PreviewColor,
 		func() *Node {
 			n := NewPreview()
@@ -138,7 +138,7 @@ func drawToolbar() {
 
 	doToolbarButton(
 		"Chart", "Plot and visualize data.",
-		buttonRect(screenWidth-buttSpacing-160-buttSpacing-160, 160),
+		buttonRect(screenWidth-buttSpacing-(160*zoomLevel)-buttSpacing-(160*zoomLevel), 160*zoomLevel),
 		ChartColor,
 		func() *Node {
 			n := NewChart()

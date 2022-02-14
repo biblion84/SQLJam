@@ -16,12 +16,12 @@ func doLayout() {
 		- Calculate output pins and final collisions of all nodes
 	*/
 
-	const titleBarHeight = 24
-	const uiPadding = 10
-	const snapRectHeight = 50
+	const titleBarHeight = 24 * zoomLevel
+	const uiPadding = 10 * zoomLevel
+	const snapRectHeight = 50 * zoomLevel
 	const pinStartHeight = titleBarHeight + uiPadding
 
-	const pinDefaultSpacing = 36 // used if the node does not specify pin heights in update
+	const pinDefaultSpacing = 36 * zoomLevel // used if the node does not specify pin heights in update
 
 	basicLayout := func(n *Node) {
 		n.Size = rl.Vector2{

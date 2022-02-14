@@ -7,8 +7,8 @@ import (
 	rl "github.com/gen2brain/raylib-go/raylib"
 )
 
-const UIFieldHeight = 36
-const UIFieldSpacing = 4
+const UIFieldHeight = 36 * zoomLevel
+const UIFieldSpacing = 4 * zoomLevel
 
 func getSchemaOfSqlSource(src SqlSource) ([]string, error) {
 	srcToRun := src.SourceToSql(0)
@@ -68,11 +68,11 @@ func columnNameDropdownOpts(inputNode *Node) []raygui.DropdownExOption {
 const basicTextSpacingRatio = 2 / 24
 
 func drawBasicText(text string, x float32, y float32, size float32, color rl.Color) {
-	rl.DrawTextEx(font, text, rl.Vector2{X: x, Y: y}, size, basicTextSpacingRatio*size, color)
+	rl.DrawTextEx(font, text, rl.Vector2{X: x, Y: y}, size*zoomLevel, basicTextSpacingRatio*size*zoomLevel, color)
 }
 
 func measureBasicText(text string, size float32) rl.Vector2 {
-	return rl.MeasureTextEx(font, text, size, basicTextSpacingRatio*size)
+	return rl.MeasureTextEx(font, text, size*zoomLevel, basicTextSpacingRatio*size)
 }
 
 func drawResizeHandle(bottomRight rl.Vector2, nodeColor rl.Color) {

@@ -87,6 +87,7 @@ func (d *Aggregate) Update(n *Node) {
 		height += UIFieldHeight + UIFieldSpacing // for group by rows
 	}
 	height += UIFieldHeight // for +/- buttons
+	height = int(float64(height) * zoomLevel)
 
 	n.UISize = rl.Vector2{600, float32(height)}
 
@@ -101,7 +102,7 @@ func (d *Aggregate) Update(n *Node) {
 }
 
 func (d *Aggregate) DoUI(n *Node) {
-	const typeWidth = 200
+	const typeWidth = 200 * zoomLevel
 
 	openDropdown, isOpen := raygui.GetOpenDropdown(d.AllDropdowns())
 	if isOpen {

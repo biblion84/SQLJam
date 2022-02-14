@@ -8,10 +8,10 @@ import (
 )
 
 const resultsHeightFrac = 0.37
-const resultsMaxHeight = 400
-const resultFontSize = 20
-const resultCellPaddingV = 5
-const resultCellPaddingH = 8
+const resultsMaxHeight = 400 * zoomLevel
+const resultFontSize = 20 * zoomLevel
+const resultCellPaddingV = 10 * zoomLevel
+const resultCellPaddingH = 8 * zoomLevel
 const resultRowHeight = resultCellPaddingV + resultFontSize + resultCellPaddingV
 
 type QueryResultPanel struct {
@@ -125,20 +125,20 @@ func drawLatestResults() {
 		dividerThickness, rl.Black,
 	)
 
-	const tabWidth = 60
-	const tabHeight = 40
+	const tabWidth = 60 * zoomLevel
+	const tabHeight = 40 * zoomLevel
 
 	var tabX float32 = screenWidth - tabWidth
 	var tabY float32 = lineY - tabHeight
 	tabRect := rl.Rectangle{tabX, tabY, tabWidth, tabHeight}
 	rl.DrawRectangleRounded(tabRect, RoundnessPx(tabRect, 4), 5, rl.Black)
 
-	tipSize := float32(32)
+	tipSize := float32(32 * zoomLevel)
 	tipZoomFmt := int(cam.Zoom * 100)
 	tipText := fmt.Sprintf("Zoom: %d%%", tipZoomFmt)
 	drawBasicText(tipText, tabX-40-float32(raygui.GetTextWidth(tipText)), tabY+(tabHeight/2)-(tipSize/2), tipSize, PaneFontColor)
 
-	const triangleSize = 12
+	const triangleSize = 12 * zoomLevel
 	t1 := rl.Vector2{-triangleSize, triangleSize / 2}
 	t2 := rl.Vector2{triangleSize, triangleSize / 2}
 	t3 := rl.Vector2{0, -triangleSize / 2}

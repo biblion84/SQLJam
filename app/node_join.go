@@ -83,7 +83,7 @@ func (d *Join) Update(n *Node) {
 	}
 
 	for i := range n.Inputs[1:] {
-		n.InputPinHeights[i+1] = uiHeight
+		n.InputPinHeights[i+1] = int(uiHeight)
 		uiHeight += UIFieldHeight + UIFieldSpacing   // alias field
 		uiHeight += UIFieldHeight + 2*UIFieldSpacing // condition field
 

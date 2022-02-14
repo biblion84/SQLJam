@@ -29,7 +29,7 @@ func (d *Filter) Update(n *Node) {
 }
 
 func (d *Filter) DoUI(n *Node) {
-	d.Conditions, _ = d.TextBox.Do(n.UIRect, d.Conditions, 100)
+	d.Conditions, _ = d.TextBox.Do(n.UIRect, d.Conditions, 100*zoomLevel)
 }
 
 func (d *Filter) Serialize() (res string, active bool) {
